@@ -166,8 +166,23 @@ st     = i:ID ASSIGN e:exp
            }
 
 /* exp --> ADDSUB? term   (ADDSUB term)* */  
-exp    = t:(ADDSUB? term)  r:(ADDSUB term)*   { return tree(t,r); }
-
+exp    = t:(sign:ADDSUB? t1:term { 
+            if(sign){
+              return {
+                type: sign, 
+                value:t1
+              };
+            }   
+            else{
+              return{
+                value: t1
+              };
+            }
+        }) 
+        r:(ADDSUB term)* { 
+	    { 
+			return tree(t,r) }; 
+        }
 
 /* term --> factor (MULTDIV factor)* */
 term   = f:factor r:(MULTDIV factor)* { return tree(f,r); }
