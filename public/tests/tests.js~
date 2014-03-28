@@ -11,4 +11,29 @@ suite('Pruebas para el parser', function(){
 	assert.equal(esperado, resultado);
 
   });
+
+    test('Begin-End', function(){
+	var input = "begin\n	x = 1 + 2\n end.";
+	var resultado = pl0.parse(input);
+	var esperado = "...";
+	
+	resultado = JSON.stringify(resultado,undefined,2);
+
+	assert.equal(esperado, resultado);
+
+  });
+
+
+  test('Begin-End', function(){
+	var input = "begin\n	x = 1 + 2\n end.";
+	var resultado = pl0.parse(input);
+	var esperado = "...";
+	
+	resultado = JSON.stringify(resultado,undefined,2);
+
+	assert.equal(esperado, resultado);
+
+  });
 });
+
+
