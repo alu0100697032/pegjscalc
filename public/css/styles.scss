@@ -9,16 +9,17 @@ body {
 }
 
 h1 {
-  color: $red;
-  font: 32px/1 $main-font;
+	color: $red;
+	font: 32px/1 $main-font;
+	text-align:left;
+	font-weight:bold;
 }
 
-header h1 {
-  font-size: 40px;
-  line-height: 80px;
-  background: transparent url(/images/logo.png) 0 0 no-repeat;
-  background-size:5% 70%;
-  padding-left: 84px;
+.mochatitle {
+	color: $white;
+	font: 16px/1 $main-font;
+	text-align:left;
+	font-weight:bold;
 }
 
 @mixin tabs ($background: blue, $color: yellow) {
@@ -26,6 +27,7 @@ header h1 {
     list-style: none;
     margin: 0;
     padding: 0;
+	border-radius:10px;
     background: $background;
     overflow: hidden;
   }
@@ -71,29 +73,29 @@ nav a.current {
   border: 1px solid $red;
 }
 
-#like {
-  p {
-    font-weight: bold;
-    color: $red;
-  }
-  input {
-    background: $red url(/images/like.png) 0 2px no-repeat;
-    border: darken($red, 10%) 1px solid;
-    height: 28px;
-    padding-left: 24px;
-  }
+#wrapper{
+	width:1200px;
+	margin: 0 auto;
+}
+
+#logo{
+	height:200px;
+	margin-bottom:5px;
+	img{
+		height:100%;
+	}
+	
 }
 
 .loadfile {
   background-color: $black;
-  border-radius: 5px;
-  border: 2px solid #DDD;
+  border-radius: 10px;
   line-height: 80px;
   
-  //width: 75%;
+  width: 700px;
   height: 20px;
-  padding: 5px;
-
+  padding:10px 10px 15px 10px;
+  margin: 10px auto;
   button, input {
     color: $black;
     float: left;
@@ -108,6 +110,22 @@ nav a.current {
     cursor:pointer;
   }
 }
+
+#parse {
+  border-radius: 15px;
+  border:none;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #904;
+  color: $white;
+ }
+
+#parse:hover {
+  cursor: pointer;
+  background-color: #0083ff;
+  color: #000; 
+}
+
    
 .error {
   color: $white;
@@ -116,4 +134,20 @@ nav a.current {
 
 .centered {
   text-align: center;
+}
+
+.justified {
+  text-align: justify;
+}
+
+.left{
+  text-align: left;
+}
+
+#output {
+  padding: 35px;
+  text-align: left;
+  color: white;
+  border-radius: 10px;
+  background-color: #000;
 }
