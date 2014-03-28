@@ -14,6 +14,12 @@
 			<% end %>
 		</ul>
 		</nav>
+		
+		<!-- Create a simple CodeMirror instance -->
+		<link rel="stylesheet" href="codemirror/codemirror.css">
+		<script src="codemirror/codemirror.js"></script>
+		<script src="codemirror/pascal.js"></script>
+		
 		<div id="form">
 			<form action="/save" method="post">
 			<textarea id="input" name="input" autofocus rows = "10"><%= source %></textarea>
@@ -30,6 +36,13 @@
 	</div>
 	<pre id="output"></pre>
 </div>
+
+<!-- Script para el CodeMirror -->
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("input"), {
+      lineNumbers: true
+    });
+</script>
 
 <script src="/javascript/pl0.js"></script>
 <script src="/javascript/main.js"></script>
