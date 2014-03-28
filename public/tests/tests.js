@@ -13,7 +13,7 @@ suite('Pruebas para el parser', function(){
   });
 
     test('Asignacion', function(){
-	var input = "a = 1.";
+	var input = "a = 1";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -25,7 +25,7 @@ suite('Pruebas para el parser', function(){
 
 
   test('Parentizacion', function(){
-	var input = "a = 2*(1+1).";
+	var input = "a = 2*(1+1)";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
