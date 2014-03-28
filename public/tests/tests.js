@@ -15,7 +15,7 @@ suite('Pruebas para el parser', function(){
     test('Asignacion', function(){
 	var input = "a = 1";
 	var resultado = pl0.parse(input);
-	var esperado = "...";
+	var esperado = "{\n  \"type\": \"=\",\n  \"left\": {\n    \"type\": \"ID\",\n    \"value\": \"a\"\n  },\n  \"right\": {\n    \"type\": \"NUM\",\n    \"value\": 1\n  }\n}\";
 	
 	resultado = JSON.stringify(resultado,undefined,2);
 
@@ -27,7 +27,7 @@ suite('Pruebas para el parser', function(){
   test('Parentizacion', function(){
 	var input = "a = 2*(1+1)";
 	var resultado = pl0.parse(input);
-	var esperado = "...";
+	var esperado = "{\n  \"type\": \"=\",\n  \"left\": {\n    \"type\": \"ID\",\n    \"value\": \"a\"\n  },\n  \"right\": {\n    \"type\": \"*\",\n    \"left\": {\n      \"type\": \"NUM\",\n      \"value\": 2\n    },\n    \"right\": {\n      \"type\": \"+\",\n      \"left\": {\n        \"type\": \"NUM\",\n        \"value\": 1\n      },\n      \"right\": {\n        \"type\": \"NUM\",\n        \"value\": 1\n      }\n    }\n  }\n}";
 	
 	resultado = JSON.stringify(resultado,undefined,2);
 
@@ -36,7 +36,7 @@ suite('Pruebas para el parser', function(){
   });
 
   test('Condicionales', function(){
-	var input = "IF a == 1 THEN b = 1.";
+	var input = "IF(a == 1) THEN b = 1";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -114,7 +114,7 @@ suite('Pruebas para el parser', function(){
 
 suite('Pruebas para las operaciones', function(){
   test('Suma', function(){
-	var input = "a = 1 + 1.";
+	var input = "a = 1 + 1";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -125,7 +125,7 @@ suite('Pruebas para las operaciones', function(){
   });
 
   test('Resta', function(){
-	var input = "a = 1 - 1.";
+	var input = "a = 1 - 1";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -136,7 +136,7 @@ suite('Pruebas para las operaciones', function(){
   });
 
   test('Division', function(){
-	var input = "a = 1 / 1.";
+	var input = "a = 1 / 1";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -147,7 +147,7 @@ suite('Pruebas para las operaciones', function(){
   });
 
   test('Multiplicacion', function(){
-	var input = "a = 1 * 1.";
+	var input = "a = 1 * 1";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
