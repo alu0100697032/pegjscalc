@@ -1,0 +1,14 @@
+var assert = chai.assert;
+
+suite('Pruebas para el parser', function(){
+  test('Ejemplo de codigo para el parser', function(){
+	var input = "a = 3-2-1";
+	var resultado = pl0.parse(input);
+	var esperado = "GRGGEG";
+	
+	resultado = JSON.stringify(resultado,undefined,2);
+
+	assert.equal(esperado, resultado);
+
+  });
+});
