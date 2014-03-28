@@ -1,39 +1,34 @@
-<h1>Analizador de PL0 ampliado usando PEG.js</h1>
+<h1>A PL0 Analyzer using PEG.js</h1>
 <div id="content">
-  <p class="loadfile">
-    <input type="file" id="examples" />
-  </p>
-  <p>
-  <nav>
-  <ul>
-    <% programs.each do |p| %>
-      <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
-    <% end %>
-  </ul>
-  </nav>
-  <table>
-    <tr>
-      <td>
-        <form action="/save" method="post">
-          <textarea id="input" name="input" 
-                    autofocus cols = "40" rows = "4">
-<%= source %>
-          </textarea>
-          <br/>
-          <label for="saveas">Save as</label>
-          <input id="saveas" type="text" name="fname" 
-                 title="name" pattern="\w+" />
-        </form>
-      </td>
-      <td><button id="parse" type="button">parse</button></td>
-    </tr>
-  </table>
-  </p>
-  <div class="output">
-    <pre>
-		<span id="output"></span> <!-- Output goes here! --> 
-    </pre>
-  </div>
+	<p>This website contains a simple example of a predictive parser. In computer science, a recursive descent parser is a kind of top-down parser built from a set of mutually recursive procedures (or a non-recursive equivalent) where each such procedure usually implements one of the production rules of the grammar. Thus the structure of the resulting program closely mirrors that of the grammar it recognizes.</p>
+	<p>A predictive parser is a recursive descent parser that does not require backtracking. Predictive parsing is possible only for the class of LL(k) grammars, which are the context-free grammars for which there exists some positive integer k that allows a recursive descent parser to decide which production to use by examining only the next k tokens of input. (The LL(k) grammars therefore exclude all ambiguous grammars, as well as all grammars that contain left recursion. Any context-free grammar can be transformed into an equivalent grammar that has no left recursion, but removal of left recursion does not always yield an LL(k) grammar.) A predictive parser runs in linear time.</p>
+	<p>This one is made for PL0 grammar language using PEGjs</p>
+	<div class="loadfile">
+		<input type="file" id="examples" />
+	</div>
+	<div>
+		<nav>
+		<ul>
+			<% programs.each do |p| %>
+				<li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
+			<% end %>
+		</ul>
+		</nav>
+		<div id="form">
+			<form action="/save" method="post">
+			<textarea id="input" name="input" autofocus rows = "10"><%= source %></textarea>
+			<br/>
+			<div class="centered">
+				<label for="saveas">Save file as</label>
+				<input id="saveas" type="text" name="fname" title="name" pattern="\w+" />
+			</div>
+			</form>	  
+		</div>
+		<div class="centered">
+			<button id="parse" type="button">CLIK HERE FOR PARSING</button>
+		</div>
+	</div>
+	<pre id="output"></pre>
 </div>
 
 <script src="/javascript/pl0.js"></script>
