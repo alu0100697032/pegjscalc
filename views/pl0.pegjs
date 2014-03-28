@@ -27,6 +27,47 @@ program  = b:block DOT { return { type: 'program', block: b } }
 *			 /CONST constant procedure st
 *			 /CONST constant procedure st
 *			 /procedure st */ 
+block  = VAR v:var p:procedure s:st
+           { 
+             
+             return { 
+               type: 'block',
+               vars: v,
+               procs: p,
+               st: s
+             }        
+           }
+       / CONST c:constant VAR v:var p:procedure s:st 
+           {         
+             
+             return { 
+               type: 'block',
+               consts: c,
+               vars: v,
+               procs: p,
+               st: s
+             }        
+           }
+       / CONST c:constant p:procedure s:st 
+           { 
+             
+             return { 
+               type: 'block',
+               consts: c,
+               procs: p,
+               st: s
+             }        
+           }
+       / p:procedure s:st 
+           { 
+             
+             return { 
+               type: 'block',
+               procs: p,
+               st: s
+             }        
+           }
+		   
 /* AUX RULES FOR BLOCK*/
 /* constant  --> ID ASSIGN NUMBER (COMA ID ASSIGN NUMBER)* SEMICOLON */
 constant   = i:ID ASSIGN n:NUMBER c:(COMA ID ASSIGN NUMBER)* SEMICOLON 
@@ -125,7 +166,7 @@ st     = i:ID ASSIGN e:exp
            }
 
 /* exp --> ADDSUB? term   (ADDSUB term)* */  
-exp    = t:term   r:(ADDSUB term)*   { return tree(t,r); }
+exp    = t:(ADDSUB? term)  r:(ADDSUB term)*   { return tree(t,r); }
 
 
 /* term --> factor (MULTDIV factor)* */
