@@ -34,9 +34,22 @@
 
 
 /* AUX RULE FOR STATEMENT*/
-/*args --> LEFTPAR ID (COMA ID)* RIGHTPAR */  
-
-
+/*args --> LEFTPAR ID (COMA ID)* RIGHTPAR */
+args   = LEFTPAR i:ID is:(COMA ID)* RIGHTPAR
+           {
+     
+             var result = [i];
+             for (var x = 0; x < is.length; x++)
+               result.push(is[x][1]);
+             
+             return result;
+           }
+  
+/*condition  --> ODD exp
+*              / exp COND exp */
+condition   = o:ODD e:exp { return { type: o, expression: e }; }
+			/ e1:exp c:CONDITION e2:exp { return { type: c, left: e1, right: e2 }; }
+   
 /*st  --> ID ASSIGN exp
 *      / CALL ID args?
 *       / BEGIN st (PYC st)* END
@@ -44,34 +57,51 @@
 *       / IF cond THEN st
 *       / WHILE cond DO st */
 st     = i:ID ASSIGN e:exp            
-            { return {type: '=', left: i, right: e}; }
-       / IF e:exp THEN st:st ELSE sf:st
+            { return { type: '=', left: i, right: e }; }
+       / CALL i:ID a:args? 
+           { 
+             return { type: 'call', id: i, arguments: a }; 
+           }
+       / BEGIN l:st r:(SEMICOLON st)* END
+           { 
+             var result = [l];
+               for (var i = 0; i < r.length; i++)
+                 result.push(r[i][1]);
+         
+               return result;
+           }
+       / IF c:condition THEN st:st ELSE sf:st
            {
              return {
                type: 'IFELSE',
-               c:  e,
-               st: st,
-               sf: sf,
+               condition:  e,
+               true_st: st,
+               false_st: sf,
              };
            }
-       / IF e:exp THEN st:st    
+       / IF c:condition THEN st:st    
            {
              return {
                type: 'IF',
-               c:  e,
+               condition:  c,
                st: st
              };
            }
-		   
-/*condition  --> ODD exp
-*              / exp COND exp */
+       / WHILE c:condition DO st:st    
+           {
+             return {
+               type: 'IF',
+               condition:  c,
+               st: st
+             };
+           }
 
 /* exp --> ADDSUB? term   (ADDSUB term)* */  
-exp    = t:term   r:(ADD term)*   { return tree(t,r); }
+exp    = t:term   r:(ADDSUB term)*   { return tree(t,r); }
 
 
 /* term --> factor (MULTDIV factor)* */
-term   = f:factor r:(MUL factor)* { return tree(f,r); }
+term   = f:factor r:(MULTDIV factor)* { return tree(f,r); }
 
 
 /* factor --> NUMBER
