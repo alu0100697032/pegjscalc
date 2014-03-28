@@ -23,6 +23,7 @@ helpers do
   end
 end
 
+get('/styles.css'){ scss :styles }
 
 get '/grammar' do
   erb :grammar
@@ -46,7 +47,14 @@ post '/save' do
   if c
     c.source = params["input"]
     c.save
-  else
+  else  
+	if PL0Program.all.size > 9
+		c = PL0Program.all.sample()
+		c.destroy!
+		#pos = rand(1..9)
+		#c = PL0Program.get(pos)
+		#c.destroy!
+	end
     c = PL0Program.new
     c.name = params["fname"]
     c.source = params["input"]
