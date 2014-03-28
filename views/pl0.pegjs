@@ -20,6 +20,7 @@
 }
 
 /* program --> block '.' */
+program  = b:block DOT { return { type: 'program', block: b } }
 
 /* block --> VAR var procedure st 
 *			 /CONST constant VAR var procedure st
@@ -28,10 +29,37 @@
 *			 /procedure st */ 
 /* AUX RULES FOR BLOCK*/
 /* constant  --> ID ASSIGN NUMBER (COMA ID ASSIGN NUMBER)* SEMICOLON */
+constant   = i:ID ASSIGN n:NUMBER c:(COMA ID ASSIGN NUMBER)* SEMICOLON 
+           {     
+             
+             var result = [{type: '=', left: i, right: n}];
+             for (var x = 0; x < c.length; x++)
+               result.push({type: '=', left: c[x][1], right: c[x][3]});
+             
+             return result;
+           }
+		   
 /* var  --> ID (COMA ID)* SEMICOLON */
-
+var    = i:ID v:(COMA ID)* SEMICOLON
+           {     
+             
+             var ids = [i];
+             for (var x = 0; x < v.length; x++)
+               ids.push(v[x][1]);
+             
+             return ids;
+           }
+		   
 /* procedure --> (PROCEDURE ID args? SEMICOLON block SEMICOLON)* */      
-
+procedure  = p:(PROCEDURE ID args? SEMICOLON block SEMICOLON)*
+           {
+                  
+             var result = [];
+             for (var x = 0; x < p.length; x++)
+               result.push({type: 'procedure', id: p[x][1], arguments: p[x][2], block: p[x][4]});
+             
+             return result;
+           }
 
 /* AUX RULE FOR STATEMENT*/
 /*args --> LEFTPAR ID (COMA ID)* RIGHTPAR */
