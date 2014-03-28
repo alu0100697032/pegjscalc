@@ -10,9 +10,9 @@ task :clean do
   sh "rm -f public/pl0.js"
 end
 
-desc "Compile public/styles.scss into public/styles.css using sass"
+desc "Compileviews//styles.scss into public/css/styles.css using sass"
 task :sass do
-  sh "sass  public/css/styles.scss public/css/styles.css"
+  sh "sass  views/styles.scss public/css/styles.css"
 end
 
 desc "tests"
