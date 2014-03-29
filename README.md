@@ -1,7 +1,30 @@
-# Sinatra example Using PEG.js and DataMapper
+# Práctica 06 - Analizador Descendente Predictivo Recursivo con PEG.JS #
 
-* [PEG.js](http://pegjs.majda.cz/)
-* [DataMapper](http://datamapper.org/docs/)
-* [PL0 Grammar. Wikipedia](http://en.wikipedia.org/wiki/Recursive_descent_parser)
-* [ULL-ETSII-GRADO-PL-13-14](https://plus.google.com/u/0/communities/107031495100582318205)
-* [PL Entorno virtual de docencia institucional 2013/2014 ULL](http://campusvirtual.ull.es/1314/course/view.php?id=1104)
+
+![alt tag](http://pegjsprdparser.herokuapp.com/images/logo.png)
+
+<table cellspacing="0">
+    <tr style="background-color: #FFFFFF;">
+    <td> <b>Participantes</b> </td>
+    <td>Boris Ballester Hernández</td>
+    <td>Guillermo Rivero Rodríguez</td>
+  </tr>
+</table>
+
+## HEROKU ##
+
+Enlace al despliegue de la aplicación en Heroku
+
+- Heroku: <href a= http://pegjsprdparser.herokuapp.com/> http://pegjsprdparser.herokuapp.com/ </href>
+
+## TEST ##
+
+Enlace a la página de pruebas
+
+- Pruebas: <href a = http://pegjsprdparser.herokuapp.com/tests> http://pegjsprdparser.herokuapp.com/tests </href>
+
+## GRAMMAR ##
+
+- Gramática: <href a= http://pegjsprdparser.herokuapp.com/grammar> http://pegjsprdparser.herokuapp.com/grammar </href>
+
+
