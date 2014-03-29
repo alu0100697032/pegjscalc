@@ -102,6 +102,17 @@ procedure  = p:(PROCEDURE ID args? SEMICOLON block SEMICOLON)*
              return result;
            }
 
+/*args --> LEFTPAR ID (COMA ID)* RIGHTPAR */
+args   = LEFTPAR i:ID is:(COMA ID)* RIGHTPAR
+           {
+             var result = [i];
+             for (var x = 0; x < is.length; x++)
+               result.push(is[x][1]);
+             
+             return result;
+           }
+		   
+		   
 /*st  --> ID ASSIGN exp
 *      / CALL ID args?
 *       / BEGIN st (PYC st)* END
@@ -149,16 +160,6 @@ st     = i:ID ASSIGN e:exp
            }
 
 /* AUX RULE FOR STATEMENT*/
-/*args --> LEFTPAR ID (COMA ID)* RIGHTPAR */
-args   = LEFTPAR i:ID is:(COMA ID)* RIGHTPAR
-           {
-     
-             var result = [i];
-             for (var x = 0; x < is.length; x++)
-               result.push(is[x][1]);
-             
-             return result;
-           }
   
 /*condition  --> ODD exp
 *              / exp COND exp */
@@ -167,7 +168,7 @@ condition   = o:ODD e:exp { return { type: o, expression: e }; }
    		   
 		   
 /* exp --> ADDSUB? term   (ADDSUB term)* */  
-exp = t:(signo:ADDSUB? t:term {return signo?{type: signo, value: t} : t;})   r:(ADDSUB term)* { return tree(t, r); }
+exp    = t:term   r:(ADD term)*   { return tree(t,r); }
 
 /* term --> factor (MULTDIV factor)* */
 term   = f:factor r:(MULTDIV factor)* { return tree(f,r); }
