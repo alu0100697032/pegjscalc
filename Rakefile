@@ -7,7 +7,7 @@ end
 
 desc "Remove pl0.pegjs"
 task :clean do
-  sh "rm -f public/pl0.js"
+  sh "rm -f public/javascipt/pl0.js"
 end
 
 desc "Compileviews//styles.scss into public/css/styles.css using sass"
