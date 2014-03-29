@@ -25,7 +25,7 @@ suite('Pruebas para el parser', function(){
 
 
   test('Parentizacion', function(){
-	var input = "a = 2*(1+1)";
+	var input = "a = 2*(1+1).";
 	var resultado = pl0.parse(input);
 	var esperado = "{\n  \"type\": \"=\",\n  \"left\": {\n    \"type\": \"ID\",\n    \"value\": \"a\"\n  },\n  \"right\": {\n    \"type\": \"*\",\n    \"left\": {\n      \"type\": \"NUM\",\n      \"value\": 2\n    },\n    \"right\": {\n      \"type\": \"+\",\n      \"left\": {\n        \"type\": \"NUM\",\n        \"value\": 1\n      },\n      \"right\": {\n        \"type\": \"NUM\",\n        \"value\": 1\n      }\n    }\n  }\n}";
 	
@@ -36,7 +36,7 @@ suite('Pruebas para el parser', function(){
   });
 
   test('Condicionales', function(){
-	var input = "IF(a == 1) THEN b = 1";
+	var input = "if a == 1 then b = 1.";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -47,7 +47,7 @@ suite('Pruebas para el parser', function(){
   }); 
   
   test('Bloques y Call', function(){
-	var input = "CONST a = 1; PROCEDURE p; a = a + 1; CALL p.";
+	var input = "const a = 1; procedure p; a = a + 1; call p.";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -57,7 +57,7 @@ suite('Pruebas para el parser', function(){
 
   });
   test('Bloques y Call', function(){
-	var input = "IF ODD 1 THEN a = 1 .";
+	var input = "if odd 1 then a = 1 .";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -68,7 +68,7 @@ suite('Pruebas para el parser', function(){
   });
 
   test('Bloques y Call', function(){
-	var input = "WHILE a == 3 DO b = b+3.";
+	var input = "call a .";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -78,19 +78,9 @@ suite('Pruebas para el parser', function(){
 
   });
 
-  test('While-Do', function(){
-	var input = "WHILE a == 3 DO b = b+3.";
-	var resultado = pl0.parse(input);
-	var esperado = "...";
-	
-	resultado = JSON.stringify(resultado,undefined,2);
-
-	assert.equal(esperado, resultado);
-
-  });
 
   test('While-Do', function(){
-	var input = "WHILE a == 3 DO b = b+3.";
+	var input = "while a == 1 do b = b+1.";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
@@ -101,7 +91,20 @@ suite('Pruebas para el parser', function(){
   });
 
   test('Begin-End', function(){
-	var input = "BEGIN a = 3; b = b+3 END.";
+	var input = "begin a = 1; b = b+1 end.";
+	var resultado = pl0.parse(input);
+	var esperado = "...";
+	
+	resultado = JSON.stringify(resultado,undefined,2);
+
+	assert.equal(esperado, resultado);
+
+  });
+});
+
+suite('Pruebas para el paso de parmetros', function(){
+  test('Funcion con parametros', function(){
+	var input = "var x, valor;\nprocedure aumentar(x);\nbegin\nvalor = x + 1\nend;\ncall aumentar(x).";
 	var resultado = pl0.parse(input);
 	var esperado = "...";
 	
