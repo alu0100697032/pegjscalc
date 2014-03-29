@@ -168,7 +168,7 @@ condition   = o:ODD e:exp { return { type: o, expression: e }; }
    		   
 		   
 /* exp --> ADDSUB? term   (ADDSUB term)* */  
-exp    = t:term   r:(ADD term)*   { return tree(t,r); }
+exp = t:(signo:ADDSUB? t:term {return signo?{type: signo, value: t} : t;})   r:(ADDSUB term)* { return tree(t, r); }
 
 /* term --> factor (MULTDIV factor)* */
 term   = f:factor r:(MULTDIV factor)* { return tree(f,r); }
