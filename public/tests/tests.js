@@ -163,25 +163,12 @@ suite('Pruebas para las operaciones', function(){
 
 suite('Errores', function(){
   test('No poner punto al final', function(){
-	var input = "a = 1 + 1";
-	var resultado = pl0.parse(input);
-	var esperado = "..";
-	
-	resultado = JSON.stringify(resultado,undefined,2);
-
-	assert.equal(esperado, resultado);
+	  assert.throws(function() { pl0.parse("a = 1 + 1"); }, /Expected "."/);
 
   });
 
   test('Sibolos raros', function(){
-	var input = "if ??!?? .s";
-	var resultado = pl0.parse(input);
-	var esperado = "..";
-	
-	resultado = JSON.stringify(resultado,undefined,2);
-
-	assert.equal(esperado, resultado);
-
+	assert.throws(function() { pl0.parse("if ??!?? .s"); }, /Expected "."/);
   });
 });
 
