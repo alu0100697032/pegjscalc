@@ -38,7 +38,7 @@ suite('Pruebas para el parser', function(){
   test('Condicionales', function(){
 	var input = "if a == 1 then b = 1.";
 	var resultado = pl0.parse(input);
-	var esperado = "{\n  \"type\": \"program\",\n  \"block\": {\n    \"type\": \"block\",\n    \"procs\": [],\n    \"st\": {\n      \"type\": "IF",\n      \"condition\": {\n        \"type\": \"==\",\n        \"left\": {\n          \"type\": \"ID\",\n          \"value\": \"a\"\n        },\n        \"right\": {\n          \"type\": \"NUM\",\n          \"value\": 1\n        }\n      },\n      \"st\": {\n        \"type\": \"=\",\n        \"left\": {\n          \"type\": \"ID\",\n          \"value\": \"b\"\n        },\n        \"right\": {\n          \"type\": \"NUM\",\n          \"value\": 1\n        }\n      }\n    }\n  }\n}";
+	var esperado = "{\n  \"type\": \"program\",\n  \"block\": {\n    \"type\": \"block\",\n    \"procs\": [],\n    \"st\": {\n      \"type\": \"IF\",\n      \"condition\": {\n        \"type\": \"==\",\n        \"left\": {\n          \"type\": \"ID\",\n          \"value\": \"a\"\n        },\n        \"right\": {\n          \"type\": \"NUM\",\n          \"value\": 1\n        }\n      },\n      \"st\": {\n        \"type\": \"=\",\n        \"left\": {\n          \"type\": \"ID\",\n          \"value\": \"b\"\n        },\n        \"right\": {\n          \"type\": \"NUM\",\n          \"value\": 1\n        }\n      }\n    }\n  }\n}";
 	
 	resultado = JSON.stringify(resultado,undefined,2);
 
