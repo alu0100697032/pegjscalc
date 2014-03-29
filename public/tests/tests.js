@@ -161,8 +161,13 @@ suite('Pruebas para las operaciones', function(){
   });
 });
 
-suite('if sin then', function(){
+suite('Errores', function(){
   test('No poner punto al final', function(){
+	  assert.throws(function() { pl0.parse("a = 1 + 1"); }, /Expected "."/);
+
+  });
+
+  test('if sin then', function(){
 	  assert.throws(function() { pl0.parse("if a == 1 call."); }, /Expected "then"/);
 
   });
